@@ -5,6 +5,12 @@ BUILD="$(pwd)"
 newline="
 "
 
+if test -f "$BUILD"/libplacebo_options ; then
+    IFS=$newline
+    set -- $(cat "$BUILD"/libplacebo_options) "$@"
+    unset -v IFS
+fi
+
 case "$PKG_CONFIG_PATH" in
   '')
     export PKG_CONFIG_PATH="$BUILD/build_libs/lib/pkgconfig"
@@ -14,5 +20,7 @@ case "$PKG_CONFIG_PATH" in
     ;;
 esac
 
+echo Using libplacebo options: "$@"
+
 cd "$BUILD"/libplacebo
-meson --prefix="$BUILD/build_libs" --libdir="$BUILD/build_libs/lib" -Ddefault_library=static build
+meson build --prefix="$BUILD/build_libs" --libdir="$BUILD/build_libs/lib" -Ddefault_library=static "$@"
