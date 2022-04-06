@@ -2,6 +2,8 @@
 set -e
 export LC_ALL=C
 
+scripts/dav1d-config
+scripts/dav1d-build "$@"
 #scripts/fribidi-config
 #scripts/fribidi-build "$@"
 scripts/libass-config
