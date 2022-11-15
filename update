@@ -17,6 +17,7 @@ do_clone()
 
 do_clone_all()
 {
+    do_clone "dav1d" "https://code.videolan.org/videolan/dav1d.git"
     do_clone "ffmpeg"     "https://github.com/FFmpeg/FFmpeg.git"
     #do_clone "fribidi"    "http://anongit.freedesktop.org/git/fribidi/fribidi.git"
     do_clone "libass"     "https://github.com/libass/libass.git"
@@ -85,6 +86,7 @@ checkout()
 }
 
 # fallback targets: release/master/@foo if no config file
+checkout_dav1d=master
 checkout_ffmpeg=master
 #checkout_fribidi=release
 checkout_libass=master
@@ -96,6 +98,7 @@ checkout_all()
 {
     set -ex
     do_clone_all
+    checkout dav1d $checkout_dav1d
     checkout ffmpeg $checkout_ffmpeg
     #$checkout fribidi $checkout_fribidi
     checkout libass $checkout_libass
@@ -125,6 +128,7 @@ shift
 # allow checkout master/release without checking the config files
 case "$1" in
     --master)
+        checkout_dav1d="master -"
         checkout_ffmpeg="master -"
         #checkout_fribidi="master -"
         checkout_libass="master -"

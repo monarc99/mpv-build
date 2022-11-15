@@ -1,6 +1,7 @@
 #!/bin/sh
 export LC_ALL=C
 
+scripts/dav1d-clean
 scripts/ffmpeg-clean
 scripts/fribidi-clean
 scripts/libass-clean
