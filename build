@@ -6,6 +6,8 @@ scripts/dav1d-config
 scripts/dav1d-build "$@"
 #scripts/fribidi-config
 #scripts/fribidi-build "$@"
+scripts/libplacebo-config
+scripts/libplacebo-build "$@"
 scripts/libass-config
 scripts/libass-build "$@"
 scripts/ffmpeg-config

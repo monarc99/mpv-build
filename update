@@ -11,6 +11,7 @@ do_clone()
         cd "$1"
         git remote set-url origin "$2"
         git fetch
+        git submodule update --init
     )
 }
 

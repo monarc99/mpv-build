@@ -11,6 +11,8 @@ if test -f "$BUILD"/libplacebo_options ; then
     unset -v IFS
 fi
 
+OPTIONS="-Ddefault_library=static -Dtests=false -Ddemos=false"
+
 case "$PKG_CONFIG_PATH" in
   '')
     export PKG_CONFIG_PATH="$BUILD/build_libs/lib/pkgconfig"
@@ -20,7 +22,9 @@ case "$PKG_CONFIG_PATH" in
     ;;
 esac
 
-echo Using libplacebo options: "$@"
-
 cd "$BUILD"/libplacebo
-meson build --prefix="$BUILD/build_libs" --libdir="$BUILD/build_libs/lib" -Ddefault_library=static "$@"
+
+test -d build && OPTIONS="$OPTIONS --wipe"
+echo Using libplacebo options: $OPTIONS "$@"
+
+meson setup build --prefix="$BUILD/build_libs" --libdir="$BUILD/build_libs/lib" $OPTIONS "$@"
